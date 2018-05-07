@@ -6,7 +6,7 @@ $(document).ready(function() {
     
     
     var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    var p1Guess; // está abajo
+    var p1Guess; 
     var pcGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
     var pcGuess = pcGuess.toLowerCase();
     console.log("omg cheater: " + pcGuess);
@@ -19,22 +19,39 @@ $(document).ready(function() {
         guessesLeft = 10;
         pcGuess = 0;
         pcGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+        soFar = 0;
         console.log("oh boi, here i go cheating again : " + pcGuess);
 
+    }
+
+    function tip() {
+        $("#tip").on("click", function() {
+            if (pcGuess == "a" || pcGuess == "b" || pcGuess == "c" || pcGuess == "d" || pcGuess == "e" || pcGuess == "f" || pcGuess == "g" || pcGuess == "k" || pcGuess == "l" || pcGuess == "m"  ){
+                $("#tip").text("I am on the first half of the alphabet");
+            } else {
+               $("#tip").text("I am on the second half of the alphabet");
+                
+            }
+        });
 
     }
+    tip();
 
     
     document.onkeypress = function(key_event){
         var p1Guess = key_event.key;
         var p1Guess = p1Guess.toLowerCase();
         soFar ++;
+    
+        
 
         if (p1Guess == pcGuess) {
             wins ++;
             guessesLeft = 10;
             alert("you have won");
             new_game();
+            $("#tip").text("Get a tip");
+
 
 
             
@@ -43,7 +60,10 @@ $(document).ready(function() {
         }
         if (guessesLeft == 0) {
             loss ++;
-            guessesLeft = 10;
+            alert("you lose");
+            new_game();
+            $("#tip").text("Get a tip");
+
         }
         /* estas eran mis pruebas para ver si jalaba
         console.log("this is the losses " + loss);
@@ -51,13 +71,6 @@ $(document).ready(function() {
         console.log("this are the guesses left " + guessesLeft);
         console.log("this are the guesses so far " + guessesSoFar);
         */
-
-        $("guessesLeft").html("Guesses left " + guessesLeft);
-        $( "soFar" ).html("Guesses so far " + soFar);
-        $( "wins").html("Your wins " + wins);
-        $( "loss").html("Your losses " + loss);
-
-
 
 
         $( "#wins" ).html("Wins: " + wins);
