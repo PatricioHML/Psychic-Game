@@ -9,11 +9,13 @@ $(document).ready(function() {
     var p1Guess; 
     var pcGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
     var pcGuess = pcGuess.toLowerCase();
+    var lettersUsed = [];
     console.log("omg cheater: " + pcGuess);
     soFar = 0;
     guessesLeft = 10;
     wins = 0;
     loss = 0;
+    
     function new_game(){
 
         guessesLeft = 10;
@@ -21,6 +23,7 @@ $(document).ready(function() {
         pcGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
         soFar = 0;
         console.log("oh boi, here i go cheating again : " + pcGuess);
+        lettersUsed = [];
 
     }
 
@@ -39,11 +42,12 @@ $(document).ready(function() {
 
     
     document.onkeypress = function(key_event){
-        var p1Guess = key_event.key;
-        var p1Guess = p1Guess.toLowerCase();
-        soFar ++;
-    
-        
+        p1Guess = key_event.key;
+        p1Guess = p1Guess.toLowerCase();
+        soFar++;
+        lettersUsed.push(p1Guess);
+
+
 
         if (p1Guess == pcGuess) {
             wins ++;
@@ -77,6 +81,7 @@ $(document).ready(function() {
         $( "#loss" ).html("Losses: " + loss);
         $( "#guessesLeft" ).html("Guesses left: " + guessesLeft);
         $( "#soFar" ).html("Guesses so far: " + soFar);
+        $("#lettersUsed").html("Your letters so far: " + lettersUsed);
 
 
 
